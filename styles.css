@@ -1,0 +1,73 @@
+body {
+  text-align: center;
+  background-color: #011f3f;
+}
+
+#level-title1 {
+  font-size: 3rem;
+  color: #fef2bf;
+}
+
+#level-title2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.7rem;
+  font-size: 2rem;
+  color: #fef2bf;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+
+.btn {
+  margin: 10px;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border: 10px solid black;
+}
+
+.bt1 {
+  border-top-left-radius: 25%;
+  border-bottom-right-radius: 5%;
+}
+.bt2 {
+  border-top-right-radius: 25%;
+  border-bottom-left-radius: 5%;
+}
+.bt3 {
+  border-bottom-left-radius: 25%;
+  border-top-right-radius: 5%;
+}
+.bt4 {
+  border-bottom-right-radius: 25%;
+  border-top-left-radius: 5%;
+}
+
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.pressed {
+  box-shadow: 0 0 20px white;
+  background-color: grey;
+}
