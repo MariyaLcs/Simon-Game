@@ -1,10 +1,16 @@
 let gamePattern = [];
 let userClickedPattern = [];
+
 let level = 0;
 var started = false;
+
 let buttonColours = ["red", "blue", "green", "yellow"];
 
 function nextSequence() {
+  userClickedPattern = [];
+  level++;
+  $("#level-title2").text("Level " + level);
+
   let randomNumber = Math.floor(Math.random() * 4);
   let randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
@@ -13,11 +19,7 @@ function nextSequence() {
     .fadeIn(100)
     .fadeOut(100)
     .fadeIn(100);
-  let audio = new Audio(`sounds/${randomChosenColour}.mp3`);
-  audio.play();
-
-  level++;
-  $("#level-title2").text("Level " + level);
+  playSound(randomChosenColour);
 }
 
 $(document).keydown(function () {
@@ -28,9 +30,14 @@ $(document).keydown(function () {
   }
 });
 
-$("#btn").click(function () {
+$(".btn").click(function () {
   let userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
+
+  playSound(userChosenColour);
+  animatePress(userChosenColour);
+
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 function playSound(name) {
@@ -38,7 +45,7 @@ function playSound(name) {
   audio.play();
 }
 
-function animatePress(currentColour) {
+function animatePress(currentColor) {
   $("#" + currentColor).addClass("pressed");
   setTimeout(function () {
     $("#" + currentColor).removeClass("pressed");
@@ -47,20 +54,21 @@ function animatePress(currentColour) {
 
 function checkAnswer(currentLevel) {
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-    console.log("success");
     if (userClickedPattern.length === gamePattern.length) {
       setTimeout(function () {
         nextSequence();
       }, 1000);
     }
   } else {
-    console.log("wrong");
     playSound("wrong");
     $("body").addClass("game-over");
+    $("#level-title2").text("Game Over, Press Any Key to Restart");
+
     setTimeout(function () {
       $("body").removeClass("game-over");
     }, 200);
-    $("#level-title2").text("Game Over, Press Any Key to Restart");
+
+    startOver();
   }
 }
 
